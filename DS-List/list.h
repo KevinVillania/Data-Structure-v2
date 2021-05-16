@@ -25,6 +25,10 @@ class List{
         void DeleteNode(int deleteData);
         void PrintNode();
         void InsertNode(int insertData, int place);
+        void InsertNode2(int insertData, int place);
+
+        void ReverseList();
+
 
 
 };

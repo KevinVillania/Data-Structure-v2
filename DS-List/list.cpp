@@ -120,7 +120,7 @@ void List::PrintNode(){
 
         curr = head;
 
-        cout << "Data\t" << "CURR\t" << "Curr->next\t";
+        cout << "Data\t" << "curr\t" << "\tcurr->next\t";
         cout << endl << "_________________________________\n";
 
         while(curr != nullptr){
@@ -148,7 +148,7 @@ void List::InsertNode(int insertData, int place){
         n1->data = insertData;
         n1->next = nullptr;
 
-
+        //disadvantage of Linked List is that you have to traverse starting from head to a node, no random access
         for(int i=0; i<place-1; i++){
 
             curr = curr->next;
@@ -162,4 +162,81 @@ void List::InsertNode(int insertData, int place){
         AddNode(insertData);
     }
 
+}
+
+void List::InsertNode2(int insertData, int place){
+
+    if(head != nullptr){
+        
+        curr = head;
+        //main code
+        node* n1 = new node;
+        
+        n1->data = insertData;
+        n1->next = nullptr;
+
+        for(int i=0; i < place; i++){
+
+            curr = curr->next;
+        }
+
+        n1->next = curr->next;
+        curr->next = n1;
+
+    }else{
+
+        AddNode(insertData);
+    }
+}
+
+
+//reversing a list using Iterative method (3 pointer method)
+void List::ReverseList(){
+
+    if(head != nullptr){
+
+        //initializing 3 pointers
+        node* prev = nullptr; //1st pointer 'prev'
+        node* next = nullptr; //2nd pointer 'next'
+        curr = head; //3rd pointer 'curr'
+
+        while(curr != nullptr){
+
+            next = curr->next; //sets next in front of curr
+            curr->next = prev; //reverses pointer to the previous node
+            prev = curr; // moves prev forward to curr
+            curr = next; // moves curr forward to next
+
+        }
+
+        head = prev;
+
+    }else{
+
+        cout << "Tree is empty\n";
+    }
+}
+
+void List::ReverseList(){
+
+    if(head != nullptr){
+
+        node* prev = nullptr;
+        node* next = nullptr;
+        curr = head;
+
+        while(curr != nullptr){
+
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        head = prev;
+
+    }else{
+
+        cout << "Tree is empty\n";
+    }
 }
