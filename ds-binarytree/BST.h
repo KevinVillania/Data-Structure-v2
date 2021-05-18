@@ -19,6 +19,7 @@ class BST{
         void PrintInOrderPrivate(node* Ptr);
         
         int FindSmallestPrivate(node* Ptr);
+        void RemoveNodePrivate(int key, node* parent);
 
     public:
         BST();
@@ -31,6 +32,9 @@ class BST{
 
         int ReturnRootKey();
         int FindSmallest(); //returns smallest node
+
+        void RemoveNode(int key);
+        void RemoveMatch();
 
 
 };

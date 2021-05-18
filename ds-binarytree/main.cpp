@@ -1,10 +1,12 @@
 #include <iostream>
-#include "BST.h"
+//#include "BST.h"
+#include "BSTPractice.h"
 using namespace std;
 
 int main(){
 
-    BST bst;
+    BST2 bst;
+    //BST bst;
 
     bst.AddLeaf(25);
     bst.AddLeaf(26);
