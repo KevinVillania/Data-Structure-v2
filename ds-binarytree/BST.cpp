@@ -182,14 +182,14 @@ void BST::RemoveNodePrivate(int key, node* parent){
 
         if(key == parent->key){
 
-            RemoveMatch();
+            RemoveRootMatch();
         }else if(key > parent->key && parent->right != nullptr){
 
-            key == parent->right->key ? RemoveMatch(key, parent->key, true) : RemoveNodePrivate(key, parent->right);
+            key == parent->right->key ? RemoveMatch(parent, parent->right, true) : RemoveNodePrivate(key, parent->right);
             
         }else if(key < parent->key && parent->left != nullptr){
 
-            key == parent->left->key ? RemoveMatch(key, parent->key, true) : RemoveNodePrivate(key, parent->left);
+            key == parent->left->key ? RemoveMatch(parent, parent->left, true) : RemoveNodePrivate(key, parent->left);
         }else{
 
             cout << key << " is not in the tree\n";
@@ -199,4 +199,53 @@ void BST::RemoveNodePrivate(int key, node* parent){
 
         cout << "Tree is empty\n";
     }
+}
+
+//Function that re-assigns root node
+void BST::RemoveRootMatch(){
+
+    if(root != nullptr){
+
+        node* delPtr = root; //create a new pointer and sets it to address of root
+        int rootKey = root->key; //gets a copy of value of root before deletion
+        int smallestNumber; 
+
+        //DIFF CASES OF ROOT VALUE
+        //Case-1 Nag-iisa lang ang root
+        if(root->left == nullptr && root->right == nullptr){
+
+            root = nullptr; //de-allocates memory
+            delete delPtr;
+
+        //Case 2 may laman left child, right child wala
+        }else if(root->left != nullptr && root->right == nullptr ){
+
+            root = root->left; //re-assign root to root->left
+            delPtr->left = nullptr; //re-assign delPtr->left to nullptr
+            delete delPtr; //delete delPtr;
+
+            cout << "The root node " << rootKey << " was deleted and overwritten with " << root->key << endl;
+
+        //Case 3 left child walang laman, right child meron
+        }else if(root->left == nullptr && root->right != nullptr ){
+
+            root = root->right;
+            delPtr->right = nullptr;
+            delete delPtr;
+
+            cout << "The root node " << rootKey << " was deleted and overwritten with " << root->key << endl;
+
+        //Case 4 both child may laman
+        }else{
+
+            smallestNumber = FindSmallestPrivate(root->right); 
+            RemoveNodePrivate(smallestNumber,root);
+            root->key = smallestNumber;
+            delete delPtr;   
+        }
+    }else{
+
+        cout << endl << "Tree is empty\n";
+    }
+
 }

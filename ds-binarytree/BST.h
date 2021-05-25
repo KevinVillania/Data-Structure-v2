@@ -36,6 +36,8 @@ class BST{
         void RemoveNode(int key);
         void RemoveMatch();
 
+        void RemoveRootMatch();
+
 
 };
 
